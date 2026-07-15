@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小牛 — 理性与浪漫并存</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       港式复古配色 - 理性与浪漫并存
+       ======================================== */
+    :root {
+      /* 主色板 - 严格遵循 brand-dna 规范 */
+      --prussian-blue: #003153; /* 主色60% */
+      --warm-gold: #E3C79F;    /* 强调色30% */
+      --ysl-red: #85120F;       /* 点缀色10% */
+
+      /* 背景色 - 偏暖纸质感 */
+      --bg-primary: #FFF8F0;   /* 主背景 暖白 */
+      --bg-secondary: #F5EDE0;    /* 深奶 呼应奢金 */
+      --bg-accent: #FAF8F5;      /* 卡片背景*/
+
+      /* 文字色 - 暖灰系 非纯黑 */
+      --text-primary: #1A1A2E;   /* 墨色 主文字 */
+      --text-secondary: #5A5A5A; /* 次要文字 */
+      --text-muted: #888888;     /* 辅助文字 */
+
+      /* 扩展色 - 规范定义 */
+      --prussian-light: rgba(0, 49, 83, 0.1);
+      --gold-light: rgba(227, 199, 159, 0.2);
+      --red-light: rgba(133, 18, 15, 0.08);
+      --gold-line: rgba(227, 199, 159, 0.3); /* 复古金线 */
+      --dark-bg: #0D1B2A;       /* 暗色场景底色 深普鲁士蓝调 */
+
+      /* 边框与阴影 */
+      --border-light: rgba(74, 65, 57, 0.12);
+      --shadow-sm: 0 2px 8px rgba(0, 49, 83, 0.08);
+      --shadow-md: 0 4px 16px rgba(0, 49, 83, 0.12);
+      --shadow-lg: 0 8px 24px rgba(0, 49, 83, 0.16);
+      --shadow-warm: 0 4px 12px rgba(133, 18, 15, 0.15);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Noto Sans SC', 'Inter', -apple-system, sans-serif;
+      font-size: clamp(1rem, 1.5vw, 1.125rem);
+      line-height: 1.7;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+    }
+
+    ::selection {
+      background: var(--gold-light);
+      color: var(--text-primary);
+    }
+
+    .highlight {
+      background: linear-gradient(transparent 60%, var(--gold-light) 60%);
+      padding: 0 0.25em;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 3vw, 2rem);
+    }
+
+    /* ========================================
+       HERO - 非对称黄金分割
+       ======================================== */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.618fr 1fr;
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+      padding: clamp(3rem, 8vh, 6rem) clamp(1rem, 3vw, 2rem);
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+        radial-gradient(circle at 20% 50%, var(--gold-light) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, var(--prussian-light) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-content,
+    .hero-visual {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-label {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      color: var(--ysl-red);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: var(--red-light);
+      border-radius: 4px;
+    }
+
+    .hero h1 {
+      font-family: 'Noto Serif SC', serif;
+      font-weight: 700;
+      font-size: clamp(2.5rem, 5vw + 0.5rem, 4rem);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: var(--prussian-blue);
+    }
+
+    .hero h1 .accent {
+      color: var(--ysl-red);
+      font-style: italic;
+      position: relative;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      max-width: 600px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--bg-accent);
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .hero-badge .icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--warm-gold);
+    }
+
+    .hero-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .avatar-frame {
+      width: 100%;
+      max-width: 300px;
+      aspect-ratio: 1;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 4px solid var(--warm-gold);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      margin: 0 auto;
+    }
+
+    .avatar-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      box-shadow: inset 0 0 0 1px rgba(227, 199, 159, 0.3);
+    }
+
+    .avatar-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .dna-card {
+      background: linear-gradient(135deg, var(--prussian-blue) 0%, #00456d 100%);
+      padding: 2rem;
+      border-radius: 12px;
+      color: #FFFFFF;
+      box-shadow: var(--shadow-md);
+    }
+
+    .dna-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      opacity: 0.9;
+    }
+
+    .dna-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .dna-item {
+      text-align: center;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+    }
+
+    .dna-color {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      margin: 0 auto 0.75rem;
+      border: 3px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .dna-label {
+      font-size: 0.75rem;
+      opacity: 0.8;
+      margin-bottom: 0.25rem;
+    }
+
+    .dna-value {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.7rem;
+      opacity: 0.6;
+    }
+
+    /* ========================================
+       SECTION 通用
+       ======================================== */
+    .section {
+      padding: clamp(60px, 10vh, 100px) 0;
+    }
+
+    .section--alt {
+      background: var(--bg-secondary);
+    }
+
+    .section-header {
+      margin-bottom: clamp(40px, 6vh, 64px);
+      text-align: center;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-number {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      color: var(--warm-gold);
+      display: block;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-family: 'Noto Serif SC', serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.3;
+      margin-bottom: 1rem;
+      color: var(--prussian-blue);
+    }
+
+    .section-desc {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    /* ========================================
+       故事时间线 - 左右交替布局
+       ======================================== */
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--warm-gold) 0%, var(--prussian-blue) 100%);
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 4rem;
+      position: relative;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+      grid-column: 2;
+    }
+
+    .timeline-item:nth-child(even) .timeline-year {
+      grid-column: 1;
+      text-align: right;
+    }
+
+    .timeline-year {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3vw, 2.5rem);
+      font-weight: 700;
+      color: var(--warm-gold);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .timeline-item:nth-child(even) .timeline-year {
+      justify-content: flex-start;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--ysl-red);
+      border: 4px solid var(--bg-primary);
+      box-shadow: var(--shadow-md);
+      z-index: 2;
+    }
+
+    .timeline-content {
+      background: var(--bg-accent);
+      padding: 2rem;
+      border-radius: 12px;
+      border-left: 4px solid var(--prussian-blue);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .timeline-content h3 {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(1.2rem, 2vw, 1.5rem);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--prussian-blue);
+    }
+
+    .timeline-content p {
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .timeline-content .highlight {
+      background: var(--gold-light);
+      padding: 0 0.25em;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    /* ========================================
+       理念卡片 - 3列网格
+       ======================================== */
+    .principle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .principle-card {
+      background: linear-gradient(135deg, #FFFFFF 0%, var(--bg-accent) 100%);
+      padding: 2.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      transition: transform 0.35s ease-out, box-shadow 0.35s ease-out;
+    }
+
+    .principle-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .principle-num {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 5vw, 4rem);
+      font-weight: 700;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      opacity: 0.08;
+      color: var(--prussian-blue);
+    }
+
+    .principle-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .principle-card:nth-child(1) .principle-icon {
+      background: var(--prussian-light);
+    }
+
+    .principle-card:nth-child(2) .principle-icon {
+      background: var(--gold-light);
+    }
+
+    .principle-card:nth-child(3) .principle-icon {
+      background: var(--red-light);
+    }
+
+    .principle-card h3 {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(1.2rem, 2vw, 1.4rem);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--prussian-blue);
+    }
+
+    .principle-card p {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .principle-card .quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      border-left: 3px solid var(--warm-gold);
+      padding-left: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    /* ========================================
+       项目展示 - 杂志式卡片
+       ======================================== */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: #FFFFFF;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.35s ease-out, box-shadow 0.35s ease-out;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .project-header {
+      height: 180px;
+      background: linear-gradient(135deg, var(--prussian-blue) 0%, #00456d 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 30% 50%, rgba(227, 199, 159, 0.1) 0%, transparent 50%);
+    }
+
+    .project-icon {
+      font-size: 3rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-body {
+      padding: 2rem;
+    }
+
+    .project-tag {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: var(--gold-light);
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .project-card h3 {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--prussian-blue);
+    }
+
+    .project-card p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .tech-badge {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.75rem;
+      background: var(--bg-secondary);
+      border-radius: 4px;
+      color: var(--text-muted);
+    }
+
+    /* ========================================
+       联系方式 - 居中 CTA
+       ======================================== */
+    .contact-section {
+      text-align: center;
+      padding: clamp(80px, 12vh, 120px) 0;
+      background: linear-gradient(135deg, var(--prussian-blue) 0%, var(--dark-bg) 100%);
+      color: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(227, 199, 159, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(133, 18, 15, 0.08) 0%, transparent 50%);
+    }
+
+    .contact-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .contact-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      opacity: 0.95;
+    }
+
+    .contact-desc {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      opacity: 0.85;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      background: var(--ysl-red);
+      color: #FFFFFF;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: var(--shadow-warm);
+      transition: all 0.3s ease-out;
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(133, 18, 15, 0.35);
+    }
+
+    .contact-btn-alt {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .contact-btn-alt:hover {
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+    }
+
+    /* ========================================
+       响应式
+       ======================================== */
+    @media (max-width: 1024px) {
+      .principle-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+      }
+
+      .hero-content {
+        order: 2;
+      }
+
+      .hero-visual {
+        order: 1;
+      }
+
+      .timeline::before {
+        left: 20px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        padding-left: 3rem;
+      }
+
+      .timeline-item:nth-child(even) .timeline-content,
+      .timeline-item:nth-child(even) .timeline-year {
+        grid-column: 1;
+        text-align: left;
+        justify-content: flex-start;
+      }
+
+      .timeline-dot {
+        left: 20px;
+      }
+
+      .dna-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .principle-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    /* ========================================
+       动画
+       ======================================== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content reveal">
+      <span class="hero-label">Portfolio 2026</span>
+      <h1>
+        小牛<br>
+        <span class="accent">理性与浪漫并存</span>
+      </h1>
+      <p class="hero-tagline">
+        热爱技术和文字的文科生。用 AI 重构工作流，用代码解决真实问题，用文字记录思考轨迹。
+      </p>
+      <div class="hero-meta">
+        <div class="hero-badge">
+          <span class="icon"></span>
+          <span>AI 工作流设计师</span>
+        </div>
+        <div class="hero-badge">
+          <span class="icon"></span>
+          <span>全栈开发者</span>
+        </div>
+        <div class="hero-badge">
+          <span class="icon"></span>
+          <span>终身学习者</span>
+        </div>
+      </div>
+    </div>
+
+      <div class="hero-visual reveal">
+        <div class="avatar-frame">
+          <img src="avatar.jpg" alt="小牛头像">
+        </div>
+      </div>
+  </section>
+
+  <!-- 我与 AI 的故事 -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">01 — Journey</span>
+        <h2 class="section-title">我与 AI 的故事</h2>
+        <p class="section-desc">不是追风口，是在真实工作中一点点被改变</p>
+      </div>
+
+      <!-- 时间线样式重写 -->
+      <style>
+        .journey-timeline {
+          display: flex;
+          gap: 2rem;
+          overflow-x: auto;
+          padding: 2rem 0 3rem;
+          scroll-snap-type: x mandatory;
+        }
+        .journey-card {
+          min-width: 280px;
+          flex: 1;
+          background: linear-gradient(135deg, #FFFFFF 0%, var(--bg-accent) 100%);
+          padding: 2rem;
+          border-radius: 12px;
+          border-left: 4px solid var(--prussian-blue);
+          box-shadow: var(--shadow-sm);
+          scroll-snap-align: start;
+          transition: transform 0.3s ease;
+          position: relative;
+        }
+        .journey-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 2px;
+          background: var(--gold-line);
+          border-radius: 12px 12px 0 0;
+        }
+        .journey-card:hover {
+          transform: translateY(-5px);
+          box-shadow: var(--shadow-lg);
+        }
+        .journey-tag {
+          font-family: 'Fira Code', monospace;
+          font-size: 0.8rem;
+          color: var(--ysl-red);
+          margin-bottom: 1rem;
+          display: inline-block;
+          padding: 0.3rem 0.8rem;
+          background: var(--red-light);
+          border-radius: 4px;
+        }
+        .journey-card h3 {
+          font-family: 'Noto Serif SC', serif;
+          font-size: 1.3rem;
+          font-weight: 600;
+          margin-bottom: 1rem;
+          color: var(--prussian-blue);
+        }
+        .journey-card p {
+          color: var(--text-secondary);
+          line-height: 1.8;
+        }
+        .journey-card .highlight {
+          background: var(--gold-light);
+          padding: 0 0.25em;
+          font-weight: 500;
+          color: var(--text-primary);
+        }
+        @media (max-width: 768px) {
+          .journey-timeline {
+            gap: 1rem;
+            padding: 1rem 0 2rem;
+          }
+          .journey-card {
+            min-width: 260px;
+            padding: 1.5rem;
+          }
+        }
+      </style>
+
+      <div class="journey-timeline">
+        <div class="journey-card">
+          <div class="journey-tag">起点</div>
+          <h3>🔍 更聪明的搜索引擎</h3>
+          <p>
+            用 ChatGPT、DeepSeek 获取信息，发现<span class="highlight">模糊的语句就能得到规范的结果</span>。
+            AI 是更聪明的搜索引擎。
+          </p>
+        </div>
+
+        <div class="journey-card">
+          <div class="journey-tag">转折</div>
+          <h3>💡 从「好用」到「想搞懂」</h3>
+          <p>
+            AIGC 业务让我不再满足于获取信息，开始思考<span class="highlight">AI 能不能帮我动手做事</span>。
+          </p>
+        </div>
+
+        <div class="journey-card">
+          <div class="journey-tag">爆发</div>
+          <h3>⚡ 依赖研发排期的日子，结束了</h3>
+          <p>
+            AI 编程工具让我有了用 AI 重构工作流的机会。第一个工具是网页高亮插件——自己开发、验证、落地。
+            那一刻意识到：<span class="highlight">依赖研发排期的日子，可以结束了</span>。
+          </p>
+        </div>
+
+        <div class="journey-card">
+          <div class="journey-tag">现在</div>
+          <h3>🎯 不是技术问题，是判断力问题</h3>
+          <p>
+            深度解析业务工作流，明确 AI 能力边界。是不是一定要 Agent？脚本自动化是否更高效？
+            <span class="highlight">这不是技术问题，是判断力问题</span>。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 工作经历 -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">02 — Experience</span>
+        <h2 class="section-title">工作经历</h2>
+        <p class="section-desc">从内容审核到客服运营，在传统岗位中探索效率突破</p>
+      </div>
+
+        <div class="principle-grid" style="grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+          <div class="principle-card">
+            <div class="principle-num">01</div>
+            <div class="principle-icon">🎯</div>
+            <h3>合肥巨量引擎 · 质量运营</h3>
+            <p>
+              <strong>2021.7 - 2023.6</strong><br><br>
+              担任组内业务专家，负责新规讲解和业务规则梳理。熟悉抖音直播、广告业务线规则，
+              升任质量运营后负责一线审核质量检测，<span class="highlight">通过与中台联动优化审核规则</span>。
+            </p>
+          </div>
+
+          <div class="principle-card">
+            <div class="principle-num">02</div>
+            <div class="principle-icon">🔄</div>
+            <h3>科大讯飞 · 跨业务模块管理</h3>
+            <p>
+              <strong>2023.11 - 至今</strong><br><br>
+              同时管理内容审核组和无线音乐工单组，<span class="highlight">跨越审核和客服工单两个业务模块</span>。
+              在传统管理上敢于创新突破，独立学习、规划开发多种提效工具，
+              用技术手段重构运营和业务工作流。
+            </p>
+          </div>
+
+          <div class="principle-card">
+            <div class="principle-num">03</div>
+            <div class="principle-icon">⚡</div>
+            <h3>核心能力</h3>
+            <p>
+              <strong>问题解决 + 持续运营</strong><br><br>
+              将复杂项目拆解成具体行动，从需求分析到方案设计，从代码实现到用户反馈，
+              <span class="highlight">每个环节追求闭环</span>。通过数据分析定位薄弱环节，
+              用结构化思维重构传统工作流，让指标达成可持续、可复制。
+            </p>
+          </div>
+        </div>
+    </div>
+  </section>
+
+    <!-- 项目展示 -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">03 — Projects</span>
+          <h2 class="section-title">精选项目</h2>
+          <p class="section-desc">用代码解决真实问题的实践案例，点击卡片查看详细设计开发流程</p>
+        </div>
+
+        <!-- 可展开项目样式 -->
+      <style>
+        .project-tabs {
+          display: flex;
+          gap: 1rem;
+          margin-bottom: 2rem;
+          border-bottom: 1px solid var(--border-light);
+          overflow-x: auto;
+          padding-bottom: 0.5rem;
+        }
+        .project-tab {
+          padding: 0.8rem 1.5rem;
+          background: transparent;
+          border: none;
+          border-radius: 6px;
+          font-size: 1rem;
+          font-weight: 500;
+          color: var(--text-secondary);
+          cursor: pointer;
+          white-space: nowrap;
+          transition: all 0.3s ease;
+        }
+        .project-tab.active {
+          background: var(--prussian-light);
+          color: var(--prussian-blue);
+          font-weight: 600;
+        }
+        .project-tab:hover {
+          background: var(--gold-light);
+        }
+        .project-content {
+          display: none;
+          animation: fadeIn 0.5s ease;
+        }
+        .project-content.active {
+          display: block;
+        }
+        .project-header-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 2rem;
+          margin-bottom: 2rem;
+          align-items: center;
+        }
+        .project-info h3 {
+          font-family: 'Noto Serif SC', serif;
+          font-size: 2rem;
+          font-weight: 700;
+          color: var(--prussian-blue);
+          margin-bottom: 1rem;
+        }
+        .project-info p {
+          font-size: 1.1rem;
+          color: var(--text-secondary);
+          line-height: 1.8;
+          margin-bottom: 1.5rem;
+        }
+        .project-tags {
+          display: flex;
+          gap: 0.5rem;
+          flex-wrap: wrap;
+        }
+        .project-tag {
+          padding: 0.3rem 0.8rem;
+          background: var(--gold-light);
+          border-radius: 4px;
+          font-size: 0.8rem;
+          font-weight: 600;
+          color: var(--text-primary);
+          border: 1px solid var(--gold-line);
+        }
+        .project-flow {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 1rem;
+          margin-top: 2rem;
+        }
+        .flow-step {
+          background: linear-gradient(135deg, #FFFFFF 0%, var(--bg-accent) 100%);
+          padding: 1.5rem;
+          border-radius: 12px;
+          border-top: 4px solid var(--warm-gold);
+          box-shadow: var(--shadow-sm);
+          text-align: center;
+        }
+        .flow-step .step-num {
+          font-family: 'Playfair Display', serif;
+          font-size: 2rem;
+          font-weight: 700;
+          color: var(--prussian-blue);
+          opacity: 0.3;
+          margin-bottom: 0.5rem;
+        }
+        .flow-step h4 {
+          font-size: 1rem;
+          font-weight: 600;
+          color: var(--prussian-blue);
+          margin-bottom: 0.5rem;
+        }
+        .flow-step p {
+          font-size: 0.85rem;
+          color: var(--text-secondary);
+          line-height: 1.6;
+        }
+        @media (max-width: 1024px) {
+          .project-flow {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+        @media (max-width: 768px) {
+          .project-header-row {
+            grid-template-columns: 1fr;
+          }
+          .project-flow {
+            grid-template-columns: 1fr;
+          }
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      </style>
+
+      <div class="project-tabs">
+        <button class="project-tab active" data-project="office">🤖 办公助手应用</button>
+        <button class="project-tab" data-project="quality">📞 智能质检系统</button>
+        <button class="project-tab" data-project="doc">📄 智能文档生成</button>
+        <button class="project-tab" data-project="ticket">🎫 自动化工单制作</button>
+      </div>
+
+      <!-- 办公助手应用 -->
+      <div class="project-content active" id="project-office">
+        <div class="project-header-row">
+          <div class="project-info">
+            <h3>办公助手应用</h3>
+            <p>
+              整合多种AI能力的一站式办公效率平台，自动处理重复工作，重构日常工作流。
+              旨在解决跨系统操作繁琐、重复劳动多的问题，大幅提升团队整体办公效率。
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Flask</span>
+              <span class="project-tag">LLM</span>
+              <span class="project-tag">自动化</span>
+            </div>
+          </div>
+          <div style="border-radius: 12px; height: 200px; overflow: hidden;">
+            <img src="project-office.jpg" alt="办公助手应用" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+        </div>
+        <div class="project-flow">
+          <div class="flow-step">
+            <div class="step-num">01</div>
+            <h4>需求收集</h4>
+            <p>调研团队日常工作痛点，梳理12项高频重复场景</p>
+          </div>
+          <div class="flow-step">
+            <div class="step-num">02</div>
+            <h4>方案验证</h4>
+            <p>3周MVP测试，覆盖10名核心用户，效率提升60%</p>
+          </div>
+          <div class="flow-step">
+            <div class="step-num">03</div>
+            <h4>开发实现</h4>
+            <p>模块化架构设计，支持插件扩展能力</p>
+          </div>
+          <div class="flow-step">
+            <div class="step-num">04</div>
+            <h4>落地推广</h4>
+            <p>全员培训，编写操作手册，建立反馈通道</p>
+          </div>
+          <div class="flow-step">
+            <div class="step-num">05</div>
+            <h4>迭代优化</h4>
+            <p>每月收集反馈，持续更新功能模块</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 智能质检系统 -->
+      <div class="project-content" id="project-quality">
+        <div class="project-header-row">
+          <div class="project-info">
+            <h3>智能质检系统</h3>
+            <p>
+              基于语音识别和大模型的智能质检工具，自动分析客服通话质量，检测合规性问题。
+              替代传统人工抽检模式，覆盖率从1%提升到100%，漏检率下降85%。
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">ASR</span>
+              <span class="project-tag">LLM</span>
+              <span class="project-tag">数据分析</span>
+              <span class="project-tag">合规检测</span>
+            </div>
+          </div>
+          <div style="border-radius: 12px; height: 200px; overflow: hidden;">
+            <img src="project-quality.jpg" alt="智能质检系统" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+        </div>
+        <div class="project-flow">
+          <div class="flow-step">
+            <div class="step-num">01</div>
+            <h4>需求收集</h4>
+            <p>梳理36项质检规则，明确评分标准和违规场景</p>
+          </div>
+          <div class="flow-step">
+            <div class="step-num">02</div>
+            <h4>方案验证</h4>
+            <p>1000条通话测试，识别准确率达到92%</p>
+          </div>
+          <div class="flow-step">
+            <div class="step-num">03</div>
+            <h4>开发实现</h4>
+            <p>语音转文字 + 语义分析 + 违规分级全流程自动化</p>
+          </div>
+          <div class="flow-step">
+            <div class="step-num">04</div>
+            <h4>落地推广</h4>
+            <p>双轨运行3个月，人工复核校准模型精度</p>
+          </div>
+          <div class="flow-step">
+            <div class="step-num">05</div>
+            <h4>迭代优化</h4>
+            <p>规则动态更新，支持自定义质检维度</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 智能文档生成 -->
+      <div class="project-content" id="project-doc">
+        <div class="project-header-row">
+          <div class="project-info">
+            <h3>智能文档生成</h3>
+            <p>
+              一键生成规范的办公文档，支持模板自定义、数据自动填充，大幅减少文案工作量。
+              覆盖投诉回复、工作汇报、运营分析等20+常用文档类型，生成速度提升90%。
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Docx</span>
+              <span class="project-tag">模板引擎</span>
+              <span class="project-tag">Markdown</span>
+              <span class="project-tag">内容生成</span>
+            </div>
+          </div>
+          <div style="border-radius: 12px; height: 200px; overflow: hidden;">
+            <img src="project-doc.jpg" alt="智能文档生成" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+        </div>
+        <div class="project-flow">
+          <div class="flow-step">
+            <div class="step-num">01</div>
+            <h4>需求收集</h4>
+            <p>梳理常用文档模板，标准化内容结构和格式要求</p>
+          </div>
+          <div class="flow-step">
+            <div class="step-num">02</div>
+            <h4>方案验证</h4>
+            <p>模板准确率测试，生成文档合格率达到95%</p>
+          </div>
+          <div class="flow-step">
+            <div class="step-num">03</div>
+            <h4>开发实现</h4>
+            <p>可视化模板编辑器 + 智能变量填充引擎</p>
+          </div>
+          <div class="flow-step">
+            <div class="step-num">04</div>
+            <h4>落地推广</h4>
+            <p>模板市场上线，支持团队共享自定义模板</p>
+          </div>
+          <div class="flow-step">
+            <div class="step-num">05</div>
+            <h4>迭代优化</h4>
+            <p>持续更新模板库，优化生成逻辑</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 自动化工单制作 -->
+      <div class="project-content" id="project-ticket">
+        <div class="project-header-row">
+          <div class="project-info">
+            <h3>自动化工单制作</h3>
+            <p>
+              工单全流程自动化处理，自动分类、派单、生成回复模板，提升客服响应效率。
+              平均工单处理时长从15分钟缩短到3分钟，客户满意度提升20%。
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">RPA</span>
+              <span class="project-tag">规则引擎</span>
+              <span class="project-tag">JavaScript</span>
+              <span class="project-tag">工作流</span>
+            </div>
+          </div>
+          <div style="border-radius: 12px; height: 200px; overflow: hidden;">
+            <img src="project-ticket.jpg" alt="自动化工单制作" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+        </div>
+        <div class="project-flow">
+          <div class="flow-step">
+            <div class="step-num">01</div>
+            <h4>需求收集</h4>
+            <p>梳理8大类工单场景，标准化处理流程和回复话术</p>
+          </div>
+          <div class="flow-step">
+            <div class="step-num">02</div>
+            <h4>方案验证</h4>
+            <p>1个月试点，自动处理准确率达到88%</p>
+          </div>
+          <div class="flow-step">
+            <div class="step-num">03</div>
+            <h4>开发实现</h4>
+            <p>智能分类引擎 + 自动派单 + 回复模板生成</p>
+          </div>
+          <div class="flow-step">
+            <div class="step-num">04</div>
+            <h4>落地推广</h4>
+            <p>人机结合模式，人工复核复杂工单</p>
+          </div>
+          <div class="flow-step">
+            <div class="step-num">05</div>
+            <h4>迭代优化</h4>
+            <p>持续优化分类模型，扩展支持工单类型</p>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+
+  <!-- 联系方式 -->
+  <section class="contact-section">
+    <div class="contact-content">
+      <h2 class="contact-title">让我们聊聊</h2>
+      <p class="contact-desc">
+        如果你对 AI 工作流设计感兴趣，或者想交流技术与人文的碰撞，
+        欢迎随时联系我。
+      </p>
+      <div class="contact-links">
+        <a href="mailto:your@email.com" class="contact-btn">
+          <span>📧</span>
+          <span>发送邮件</span>
+        </a>
+        <a href="https://github.com/yourusername" class="contact-btn contact-btn-alt" target="_blank">
+          <span>💻</span>
+          <span>GitHub</span>
+        </a>
+        <a href="https://twitter.com/yourusername" class="contact-btn contact-btn-alt" target="_blank">
+          <span>🐦</span>
+          <span>Twitter</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Scroll reveal animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.journey-card, .principle-card').forEach(el => {
+      observer.observe(el);
+    });
+
+    // 项目切换逻辑
+    const projectTabs = document.querySelectorAll('.project-tab');
+    const projectContents = document.querySelectorAll('.project-content');
+
+    projectTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const projectId = tab.dataset.project;
+        
+        // 切换标签激活状态
+        projectTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // 切换内容显示
+        projectContents.forEach(content => {
+          content.classList.remove('active');
+        });
+        document.getElementById(`project-${projectId}`).classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
